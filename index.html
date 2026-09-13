@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Lokesh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,600;0,700;1,500&family=Caveat:wght@500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#150B22;
+    --ink-2:#1F1330;
+    --gold:#F2B705;
+    --coral:#F4553B;
+    --cream:#F8F1E4;
+    --lav:#C9B7E8;
+    --line: rgba(248,241,228,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Space Grotesk', sans-serif;
+    overflow-x:hidden;
+  }
+  .page{
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:6vh 6vw;
+    position:relative;
+    border-bottom:1px solid var(--line);
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.05;
+  }
+  .script{
+    font-family:'Caveat', cursive;
+  }
+
+  /* ---------- NAV DOTS ---------- */
+  .nav-dots{
+    position:fixed;
+    right:22px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    z-index:50;
+  }
+  .nav-dots a{
+    width:9px; height:9px;
+    border-radius:50%;
+    background:rgba(248,241,228,0.3);
+    display:block;
+    transition:background .3s, transform .3s;
+  }
+  .nav-dots a.active{
+    background:var(--gold);
+    transform:scale(1.4);
+  }
+  @media (max-width:720px){
+    .nav-dots{
+      right:auto; left:50%; top:auto; bottom:16px;
+      transform:translateX(-50%);
+      flex-direction:row;
+    }
+    .nav-dots a.active{transform:scale(1.4) translateY(0);}
+  }
+
+  /* ---------- MUSIC TOGGLE ---------- */
+  .music-btn{
+    position:fixed;
+    left:20px; top:20px;
+    z-index:60;
+    background:rgba(21,11,34,0.7);
+    border:1px solid var(--line);
+    color:var(--cream);
+    font-family:'Space Grotesk', sans-serif;
+    font-size:13px;
+    padding:9px 16px 9px 14px;
+    border-radius:30px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    backdrop-filter: blur(6px);
+  }
+  .music-btn .bars{display:flex; gap:2px; align-items:flex-end; height:12px;}
+  .music-btn .bars span{
+    width:2px; background:var(--gold); display:block;
+    animation: bar 0.9s infinite ease-in-out;
+  }
+  .music-btn.playing .bars span{animation-play-state:running;}
+  .music-btn:not(.playing) .bars span{animation-play-state:paused; height:3px !important;}
+  .bars span:nth-child(1){animation-delay:0s;}
+  .bars span:nth-child(2){animation-delay:.2s;}
+  .bars span:nth-child(3){animation-delay:.4s;}
+  @keyframes bar{
+    0%,100%{height:3px;}
+    50%{height:12px;}
+  }
+
+  /* ---------- PAGE 1 : HERO ---------- */
+  #p1{
+    background:
+      radial-gradient(circle at 20% 20%, rgba(242,183,5,0.18), transparent 45%),
+      radial-gradient(circle at 80% 75%, rgba(244,85,59,0.18), transparent 45%),
+      var(--ink);
+    text-align:center;
+  }
+  .eyebrow-1{
+    font-family:'Caveat', cursive;
+    font-size:clamp(22px,3.2vw,30px);
+    color:var(--lav);
+    margin-bottom:6px;
+  }
+  .hero-title{
+    font-size:clamp(48px,11vw,110px);
+    letter-spacing:-0.02em;
+  }
+  .hero-title .amp{color:var(--gold); font-style:italic; font-weight:500;}
+  .hero-name{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--coral);
+    font-size:clamp(44px,10vw,100px);
+    display:block;
+    margin-top:-6px;
+  }
+  .hero-sub{
+    max-width:520px;
+    margin:26px auto 0;
+    font-size:clamp(16px,2vw,19px);
+    color:var(--cream);
+    opacity:0.85;
+    line-height:1.6;
+  }
+  .flames{
+    display:flex; gap:14px; justify-content:center; margin-top:34px;
+  }
+  .flame{
+    width:14px; height:22px;
+    background:linear-gradient(to top, var(--coral), var(--gold));
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation:flicker 1.6s infinite ease-in-out;
+    transform-origin:bottom center;
+  }
+  .flame:nth-child(2){animation-delay:.3s;}
+  .flame:nth-child(3){animation-delay:.6s;}
+  .flame:nth-child(4){animation-delay:.15s;}
+  .flame:nth-child(5){animation-delay:.45s;}
+  @keyframes flicker{
+    0%,100%{transform:scaleY(1) rotate(-1deg);}
+    50%{transform:scaleY(1.15) rotate(2deg);}
+  }
+  .scroll-cue{
+    position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+    font-size:12px; letter-spacing:0.08em; color:var(--lav); opacity:0.7;
+  }
+
+  /* ---------- SECTION LABEL ---------- */
+  .section-head{
+    max-width:640px;
+    width:100%;
+    margin:0 auto 34px;
+  }
+  .section-head .num{
+    font-family:'Caveat', cursive;
+    font-size:22px;
+    color:var(--gold);
+  }
+  .section-head h2{
+    font-size:clamp(30px,5vw,46px);
+    margin-top:4px;
+  }
+
+  /* ---------- MESSAGE CARD ---------- */
+  .msg-wrap{max-width:640px; width:100%; margin:0 auto;}
+  .msg{
+    font-size:clamp(16px,2.1vw,19px);
+    line-height:1.75;
+    color:var(--cream);
+    opacity:0.92;
+    white-space:pre-line;
+  }
+  .msg strong{color:var(--gold); font-weight:600;}
+
+  /* ---------- PAGE 2 : FUNNY + GALLERY ---------- */
+  #p2{background:var(--ink-2);}
+  .gallery{
+    display:flex;
+    gap:16px;
+    margin-top:38px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:640px;
+  }
+  .slot{
+    width:150px; height:150px;
+    border-radius:14px;
+    border:1.5px dashed rgba(248,241,228,0.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:12px;
+    color:var(--lav);
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    background:rgba(248,241,228,0.03);
+    transition:border-color .25s, transform .25s;
+    padding:10px;
+  }
+  .slot:hover{border-color:var(--gold); transform:translateY(-3px);}
+  .slot img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+  .slot input{display:none;}
+  .slot .plus{font-size:22px; display:block; margin-bottom:4px; color:var(--gold);}
+
+  /* ---------- PAGE 3 : EMOTIONAL + TANGLISH ---------- */
+  #p3{
+    background:
+      radial-gradient(circle at 85% 15%, rgba(201,183,232,0.14), transparent 50%),
+      var(--ink);
+  }
+  .divider{
+    width:60px; height:1px; background:var(--line); margin:40px auto;
+  }
+  .tag{
+    display:inline-block;
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:var(--ink);
+    background:var(--lav);
+    padding:4px 10px;
+    border-radius:20px;
+    margin-bottom:14px;
+    font-family:'Space Grotesk';
+  }
+
+  /* ---------- PAGE 4 : FINALE ---------- */
+  #p4{
+    background:
+      radial-gradient(circle at 50% 0%, rgba(242,183,5,0.15), transparent 55%),
+      var(--ink);
+    text-align:center;
+  }
+  .finale-badge{
+    font-family:'Caveat', cursive;
+    color:var(--gold);
+    font-size:24px;
+    margin-bottom:8px;
+  }
+  #p4 h2{font-size:clamp(32px,6vw,54px); margin-bottom:26px;}
+  .finale-msg{
+    text-align:left;
+    max-width:620px;
+    margin:0 auto;
+  }
+  .gallery-2{
+    display:flex; gap:14px; justify-content:center; margin:36px 0; flex-wrap:wrap;
+  }
+  .signoff{
+    margin-top:44px;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:clamp(22px,3.4vw,30px);
+    color:var(--coral);
+  }
+  .from{
+    margin-top:10px;
+    font-size:14px;
+    color:var(--lav);
+    letter-spacing:0.04em;
+  }
+  .confetti-btn{
+    margin-top:38px;
+    background:var(--coral);
+    color:var(--cream);
+    border:none;
+    padding:14px 30px;
+    border-radius:30px;
+    font-family:'Space Grotesk';
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    letter-spacing:0.02em;
+    box-shadow:0 8px 24px rgba(244,85,59,0.35);
+  }
+  #confetti-canvas{
+    position:fixed; inset:0; pointer-events:none; z-index:100;
+  }
+  .note{
+    margin-top:16px;
+    font-size:12px;
+    color:var(--lav);
+    opacity:0.6;
+    max-width:420px;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+  <span class="bars"><span></span><span></span><span></span></span>
+  <span id="musicLabel">Play music</span>
+</button>
+<audio id="bgm" loop preload="auto" autoplay>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<nav class="nav-dots" id="navDots">
+  <a href="#p1" class="active" data-i="0"></a>
+  <a href="#p2" data-i="1"></a>
+  <a href="#p3" data-i="2"></a>
+  <a href="#p4" data-i="3"></a>
+</nav>
+
+<!-- PAGE 1 — HERO -->
+<section class="page" id="p1">
+  <div class="eyebrow-1">the guy who never fails to show up —</div>
+  <h1 class="hero-title">Happy Birthday<span class="hero-name">Lokesh</span></h1>
+  <p class="hero-sub script" style="font-size:22px; opacity:1;">Yo Lokesh 🎉 Level up unlocked. Same wild energy, same terrible jokes, same guy I'd pick every single time. Go be legendary today. 🔥🎂</p>
+  <div class="flames">
+    <div class="flame"></div><div class="flame"></div><div class="flame"></div><div class="flame"></div><div class="flame"></div>
+  </div>
+  <div class="scroll-cue">SCROLL ↓ THREE MORE PAGES MADE FOR YOU</div>
+</section>
+
+<!-- PAGE 2 — FUNNY + PHOTOS -->
+<section class="page" id="p2">
+  <div class="section-head">
+    <div class="num">page two</div>
+    <h2>The roast you deserve</h2>
+  </div>
+  <div class="msg-wrap">
+    <p class="msg">Happy birthday to the guy who still thinks he's the funny one in our group 😂 (he's not — that's me). Real talk though: you eat like it's a competitive sport, you're always twenty minutes late to your own plans, and somehow I still keep you around. Must be the face.
+
+Here's to another year of you being a walking disaster I refuse to replace. Love you, idiot. 🎂🔥</p>
+  </div>
+
+  <div class="gallery">
+    <label class="slot" for="up1"><span id="s1"><span class="plus">+</span>add a photo</span><input type="file" accept="image/*" id="up1" onchange="loadImg(this,'s1')"></label>
+    <label class="slot" for="up2"><span id="s2"><span class="plus">+</span>add a photo</span><input type="file" accept="image/*" id="up2" onchange="loadImg(this,'s2')"></label>
+    <label class="slot" for="up3"><span id="s3"><span class="plus">+</span>add a photo</span><input type="file" accept="image/*" id="up3" onchange="loadImg(this,'s3')"></label>
+  </div>
+  <p class="note">Tap a box and pick a photo of you two — it'll drop right in, just for this session.</p>
+</section>
+
+<!-- PAGE 3 — EMOTIONAL + TANGLISH -->
+<section class="page" id="p3">
+  <div class="section-head">
+    <div class="num">page three</div>
+    <h2>The part I actually mean</h2>
+  </div>
+  <div class="msg-wrap">
+    <p class="msg">Lokesh, some people come into your life and just... stay. Not because they try to, but because there was never a version of my story that made sense without them in it. That's you, for me.
+
+Through the good years and the messy ones, you never once made me feel like I was too much or not enough — you just showed up. Today isn't only about you turning a year older. It's about me being grateful I get to know you at all.
+
+May this year quietly hand you everything you've been chasing. <strong>Happy birthday, brother.</strong> ❤️</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="msg-wrap">
+    <span class="tag">ஒரு நண்பனுக்கு</span>
+    <p class="msg">Lokesh da 🎉 Innaiku unaku birthday-nu solradhukku konjam feel aagudhu — edho nee already 60 mudhusa pesuven ready-ah irukka maadhiri 😂. But seriously, nee oru semma nanban da. Kashtam vandhaalum, joke pannunaalum, life-a easy-ah pannuran nee.
+
+Vaazhthukkal nanba — innum periya success, nalla health, romba santhosham. Ellame un vaazhkaila niraya vaazhthukanum. <strong>Happy Birthday da legend!</strong> 🔥❤️</p>
+  </div>
+</section>
+
+<!-- PAGE 4 — FINALE -->
+<section class="page" id="p4">
+  <div class="finale-badge">the one that matters most</div>
+  <h2>For Lokesh, on his day</h2>
+
+  <div class="finale-msg">
+    <p class="msg">Lokesh, bro. 🎂
+
+Eleven-year-old me would never believe I'd still be writing birthday messages to you as a grown man who still can't parallel park and still laughs at his own jokes before he even finishes them 😂. But here we are.
+
+You've been the guy I call first with good news, and the guy I call first when everything's falling apart — and somehow you show up the same way for both. That's rare. I don't take it lightly, even when I'm roasting you for your fashion choices and your talent for being late to literally everything.
+
+So today, I'm not doing the usual "happy birthday, have a good one" and calling it done. I want this year to actually give you something real — the success you've been quietly chasing, health that never lets you down, people who see you the way I do, and enough good days to outweigh the hard ones.
+
+You've made my life funnier, easier, and a hell of a lot better just by being in it. Don't ever change — except maybe your taste in music.</p>
+  </div>
+
+  <div class="gallery-2">
+    <label class="slot" for="up4"><span id="s4"><span class="plus">+</span>add a photo</span><input type="file" accept="image/*" id="up4" onchange="loadImg(this,'s4')"></label>
+    <label class="slot" for="up5"><span id="s5"><span class="plus">+</span>add a photo</span><input type="file" accept="image/*" id="up5" onchange="loadImg(this,'s5')"></label>
+    <label class="slot" for="up6"><span id="s6"><span class="plus">+</span>add a photo</span><input type="file" accept="image/*" id="up6" onchange="loadImg(this,'s6')"></label>
+  </div>
+
+  <div class="signoff">Happy Birthday, Lokesh.<br>Here's to years as loud and unforgettable as you are. 🔥❤️🥳</div>
+  <div class="from">— your brother, always</div>
+
+  <button class="confetti-btn" onclick="burst()">celebrate 🎉</button>
+</section>
+
+<script>
+  // active dot on scroll
+  const sections = document.querySelectorAll('.page');
+  const dots = document.querySelectorAll('.nav-dots a');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx = Array.from(sections).indexOf(e.target);
+        dots.forEach(d=>d.classList.remove('active'));
+        dots[idx].classList.add('active');
+      }
+    });
+  }, {threshold:0.55});
+  sections.forEach(s=>io.observe(s));
+
+  // photo upload
+  function loadImg(input, slotId){
+    const file = input.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e){
+      const span = document.getElementById(slotId);
+      span.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      span.parentElement.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // music: loops forever once started (loop attribute), auto-starts
+  // the moment the page can start it (immediately, or on first touch/click
+  // if the browser blocks silent autoplay-with-sound)
+  const bgm = document.getElementById('bgm');
+  const musicBtn = document.getElementById('musicBtn');
+  const musicLabel = document.getElementById('musicLabel');
+  bgm.volume = 0.5;
+
+  function setPlayingUI(){
+    musicBtn.classList.add('playing');
+    musicLabel.textContent = 'Playing';
+  }
+  function setPausedUI(){
+    musicBtn.classList.remove('playing');
+    musicLabel.textContent = 'Play music';
+  }
+
+  function attemptAutoplay(){
+    const p = bgm.play();
+    if(p !== undefined){
+      p.then(setPlayingUI).catch(()=>{
+        // blocked by browser — will start on first interaction instead
+        setPausedUI();
+      });
+    }
+  }
+  window.addEventListener('DOMContentLoaded', attemptAutoplay);
+
+  // fallback: start on the very first tap/click/scroll/key anywhere on the page
+  function startOnFirstInteraction(){
+    if(bgm.paused){
+      bgm.play().then(setPlayingUI).catch(()=>{});
+    }
+    ['click','touchstart','keydown','wheel','scroll'].forEach(evt=>
+      window.removeEventListener(evt, startOnFirstInteraction)
+    );
+  }
+  ['click','touchstart','keydown','wheel','scroll'].forEach(evt=>
+    window.addEventListener(evt, startOnFirstInteraction, {once:true, passive:true})
+  );
+
+  function toggleMusic(){
+    if(bgm.paused){
+      bgm.play().then(setPlayingUI).catch(()=>{});
+    } else {
+      bgm.pause();
+      setPausedUI();
+    }
+  }
+
+  // confetti burst
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  function resize(){canvas.width = window.innerWidth; canvas.height = window.innerHeight;}
+  resize();
+  window.addEventListener('resize', resize);
+  let particles = [];
+  const colors = ['#F2B705','#F4553B','#C9B7E8','#F8F1E4'];
+  function burst(){
+    particles = [];
+    for(let i=0;i<140;i++){
+      particles.push({
+        x: canvas.width/2,
+        y: canvas.height*0.6,
+        vx: (Math.random()-0.5)*14,
+        vy: (Math.random()-1.6)*14,
+        size: Math.random()*6+4,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        rot: Math.random()*360,
+        vr: (Math.random()-0.5)*12,
+        life: 100
+      });
+    }
+    requestAnimationFrame(animate);
+  }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.rot += p.vr; p.life -= 1;
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = Math.max(p.life/100,0);
+      ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+      ctx.restore();
+    });
+    particles = particles.filter(p=>p.life>0 && p.y<canvas.height+50);
+    if(particles.length>0) requestAnimationFrame(animate);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+</script>
+</body>
+</html>
